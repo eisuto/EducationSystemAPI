@@ -16,6 +16,7 @@ def b642hex(string):
     result = ''.join([hex(i).replace('0x','').zfill(2) for i in bytes(m)])
     return result
 
+
 class Sdata:
     __session = 0
     # 加密后密码
@@ -83,7 +84,7 @@ class Sdata:
         key.setPublic(b642hex(self.__modulus), b642hex(self.__exponent))
         return hex2b64(key.encrypt(self.__password))
 
-    # 模拟登陆
+    # 校验登陆
     def login(self):
         url = "http://jw.dfxy.net/jwglxt/xtgl/login_slogin.html?time={timed}".format(timed=self.__timed)
         data = {
@@ -92,7 +93,10 @@ class Sdata:
             'mm': self.__ras_password,
             'mm': self.__ras_password
         }
-        return self.__session.post(url, data=data)
+        return_page = self.__session.post(url, data=data)
+        if str(return_page.url).find("initMenu") == -1:
+            return False
+        return True
 
     # 获取姓名 学部
     def get_name_college(self):
@@ -104,13 +108,16 @@ class Sdata:
         return name.text, coll.text
 
 
-if __name__ == "__main__":
-    yhm = input("请输入学号")
-    mm  = input("请输入密码")
-    test = Sdata(yhm, mm)
+'''
+    if __name__ == "__main__":
+    # yhm = input("请输入学号")
+    # mm  = input("请输入密码")
+    # test = Sdata(yhm, mm)
     if str(test.login().url).find("initMenu") == -1:
         print("登录失败，请重试")
     print("欢迎您：{name} , {coll}".format(name=test.get_name_college()[0], coll=test.get_name_college()[1]))
+'''
+
 
 
 
