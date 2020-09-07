@@ -1,5 +1,8 @@
 import re
 import time
+import requests
+
+
 import RSAJS
 import base64
 from requests_html import HTMLSession
@@ -13,7 +16,7 @@ def hex2b64(string):
 
 def b642hex(string):
     m = base64.b64decode(string.encode('utf-8'))
-    result = ''.join([hex(i).replace('0x','').zfill(2) for i in bytes(m)])
+    result = ''.join([hex(i).replace('0x', '').zfill(2) for i in bytes(m)])
     return result
 
 
@@ -58,7 +61,11 @@ class Sdata:
         self.__modulus, self.__exponent = self.get_me()
         self.__ras_password = self.get_rsa_password()
 
+    # 获取会话
+    def get_session(self):
+        return self.__session
     # 生成时间戳 13 位
+
     @staticmethod
     def creat_timed():
         return str(round(time.time() * 1000))
@@ -98,16 +105,40 @@ class Sdata:
             return False
         return True
 
-    # 获取姓名 学部
-    def get_name_college(self, yhm, mm):
-        test = Sdata(yhm, mm)
-        test.login()
+#    # 获取姓名 学部
+#    def get_name_college(self):
+#        test = Sdata(self.__yhm, self.__password)
+#        test.login()
+#        url = "http://jw.dfxy.net/jwglxt/xtgl/index_cxYhxxIndex.html?xt=jw&localeKey=zh_CN&_={timed}" \
+#              "&gnmkdm=index&su={yhm}".format(timed=self.creat_timed(), yhm=self.__yhm)
+#        page = test.__session.get(url).html
+#        name = page.find(".media-heading", first=True)
+#        coll = page.find("p", first=True)
+##       return name.text, coll.text
+#        return {
+#            "name": name.text,
+#            "college": coll.text
+#        }
+
+
+# 获取姓名 学部 照片
+def get_name_college(no, mm):
+    test = Sdata(no, mm)
+    if test.login():
         url = "http://jw.dfxy.net/jwglxt/xtgl/index_cxYhxxIndex.html?xt=jw&localeKey=zh_CN&_={timed}" \
-              "&gnmkdm=index&su={yhm}".format(timed=self.creat_timed(), yhm=self.__yhm)
-        page = test.__session.get(url).html
+              "&gnmkdm=index&su={yhm}".format(timed=test.creat_timed(), yhm=no)
+        page = test.get_session().get(url).html
         name = page.find(".media-heading", first=True)
         coll = page.find("p", first=True)
-        return name.text, coll.text
+        # 保存照片到本地
+        html = test.get_session().get(url='http://jw.dfxy.net'+(page.find(".media-object", first=True).attrs['src']))
+        with open('C:/Users/38114/Desktop/'+no+'_'+mm+'.jpg', 'wb') as file:
+            file.write(html.content)
+        return {
+            "name": name.text,
+            "college": coll.text,
+        }
+    return "获取信息失败"
 
 
 if __name__ == "__main__":

@@ -1,4 +1,0 @@
-e:
-cd E:\wx\python\EducationSystemAPI\webSever
-set FLASK_APP=centerRoute.py
-python -m flask run

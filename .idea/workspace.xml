@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a79f3ace-3c50-44e6-8013-84185cb5499d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    <list default="true" id="a79f3ace-3c50-44e6-8013-84185cb5499d" name="Default Changelist" comment="web">
+      <change afterPath="$PROJECT_DIR$/1.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/centerRoute.py" beforeDir="false" afterPath="$PROJECT_DIR$/centerRoute.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainAPI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.bat" beforeDir="false" afterPath="$PROJECT_DIR$/run.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webSever/run.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -43,7 +57,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -217,8 +231,16 @@
       <workItem from="1599369440419" duration="2564000" />
       <workItem from="1599374220638" duration="4124000" />
       <workItem from="1599442892732" duration="11254000" />
-      <workItem from="1599472259670" duration="477000" />
+      <workItem from="1599472259670" duration="10024000" />
     </task>
+    <task id="LOCAL-00001" summary="web">
+      <created>1599472763971</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1599472763971</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,12 +248,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="web" />
+    <option name="LAST_COMMIT_MESSAGE" value="web" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599358621815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1599358621815" />
+    <state x="618" y="109" key="CommitChangelistDialog2" timestamp="1599472864407">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="618" y="109" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1599472864407" />
     <state width="1479" height="521" key="DebuggerActiveHint" timestamp="1599457205728">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -240,26 +268,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1599358620655" />
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1599459261249">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1599482062030">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.96.1920.1040@0.0.1920.1040" timestamp="1599459261249" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599446188524" />
-    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1599459261249">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599482062030" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1599482062030">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.96.1920.1040@0.0.1920.1040" timestamp="1599459261249" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599446188524" />
-    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1599459261249">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599482062030" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1599482062029">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.96.1920.1040@0.0.1920.1040" timestamp="1599459261249" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599446188523" />
-    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1599459261249">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599482062029" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1599482062030">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.96.1920.1040@0.0.1920.1040" timestamp="1599459261249" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599446188524" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599482062030" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1599459261249">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -280,10 +308,10 @@
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.96.1920.1040@0.0.1920.1040" timestamp="1599459261249" />
     <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599369429721" />
-    <state x="461" y="161" key="SettingsEditor" timestamp="1599444018821">
+    <state x="461" y="161" key="SettingsEditor" timestamp="1599477350399">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1599444018821" />
+    <state x="461" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1599477350399" />
     <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1599457347479">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -294,7 +322,7 @@
     <SUITE FILE_PATH="coverage/Achievement$qi.coverage" NAME="qi Coverage Results" MODIFIED="1599371373789" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/EducationSystemAPI$centerRoute.coverage" NAME="centerRoute Coverage Results" MODIFIED="1599454321984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/webSever" />
     <SUITE FILE_PATH="coverage/EducationSystemAPI$mainAPI__1_.coverage" NAME="mainAPI (1) Coverage Results" MODIFIED="1599458085022" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/EducationSystemAPI$centerRoute__1_.coverage" NAME="centerRoute (1) Coverage Results" MODIFIED="1599458279997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/EducationSystemAPI$centerRoute__1_.coverage" NAME="centerRoute (1) Coverage Results" MODIFIED="1599482062022" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Achievement$3_6.coverage" NAME="3.6 Coverage Results" MODIFIED="1599358622659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/EducationSystemAPI$qi.coverage" NAME="qi Coverage Results" MODIFIED="1599374233000" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/EducationSystemAPI$mainAPI.coverage" NAME="mainAPI Coverage Results" MODIFIED="1599443366895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
