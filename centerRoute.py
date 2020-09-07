@@ -10,4 +10,15 @@ def hello_world():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    return str(mainAPI.Sdata(request.form['no'],request.form['mm']).login())
+    no = request.form['no']
+    mm = request.form['mm']
+    student = mainAPI.Sdata(no, mm)
+    name, coll = student.get_name_college(no, mm)
+    s1 = "欢迎您：{name} , {coll}".format(name=name, coll=coll)
+    return s1
+# @app.route('/getNameCollege', methods=['POST', 'GET'])
+# def getNameCollege():
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port="80")

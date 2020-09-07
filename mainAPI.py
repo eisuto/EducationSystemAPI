@@ -99,24 +99,31 @@ class Sdata:
         return True
 
     # 获取姓名 学部
-    def get_name_college(self):
+    def get_name_college(self, yhm, mm):
+        test = Sdata(yhm, mm)
+        test.login()
         url = "http://jw.dfxy.net/jwglxt/xtgl/index_cxYhxxIndex.html?xt=jw&localeKey=zh_CN&_={timed}" \
               "&gnmkdm=index&su={yhm}".format(timed=self.creat_timed(), yhm=self.__yhm)
-        page = self.__session.get(url).html
+        page = test.__session.get(url).html
         name = page.find(".media-heading", first=True)
         coll = page.find("p", first=True)
         return name.text, coll.text
 
 
-'''
-    if __name__ == "__main__":
-    # yhm = input("请输入学号")
-    # mm  = input("请输入密码")
-    # test = Sdata(yhm, mm)
-    if str(test.login().url).find("initMenu") == -1:
+if __name__ == "__main__":
+    yhm = input("请输入学号")
+    mm  = input("请输入密码")
+    test = Sdata(yhm, mm)
+    if test.login():
+        print("欢迎您：{name} , {coll}".format(name=test.get_name_college(yhm, mm)[0],
+                                           coll=test.get_name_college(yhm, mm)[1]))
+    else:
         print("登录失败，请重试")
-    print("欢迎您：{name} , {coll}".format(name=test.get_name_college()[0], coll=test.get_name_college()[1]))
-'''
+
+
+
+
+
 
 
 
