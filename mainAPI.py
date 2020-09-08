@@ -119,7 +119,6 @@ class Sdata:
 #            "college": coll.text
 #        }
 
-
 # 获取姓名 学部 照片
 def get_name_college(no, mm):
     test = Sdata(no, mm)
@@ -131,13 +130,49 @@ def get_name_college(no, mm):
         coll = page.find("p", first=True)
         # 保存照片到本地
         html = test.get_session().get(url='http://jw.dfxy.net'+(page.find(".media-object", first=True).attrs['src']))
-        with open('C:/Users/38114/Desktop/img/'+no+'_'+mm+'.jpg', 'wb') as file:
+        with open('C:/img/'+no+'_'+mm+'.jpg', 'wb') as file:
             file.write(html.content)
         return {
             "name": name.text,
             "college": coll.text,
         }
     return "获取信息失败"
+
+
+# 获取课程表
+def get_class_schedule(no, mm):
+    test = Sdata(no, mm)
+    if test.login():
+        data = {
+            "xnm": "2020",
+            "xqm": "3"
+        }
+        re_json = test.get_session().post("http://jw.dfxy.net/jwglxt/kbcx/xskbcx_cxXsKb.html?gnmkdm=N2151",
+                                          data=data).text
+        print(re_json)
+        return re_json
+    return  "获取课程表失败"
+
+
+# 获取成绩
+def get_grades(no, mm, year):
+    test = Sdata(no, mm)
+    if test.login():
+        data = {
+            "xnm": str(year),
+            "xqm": "",
+            "_search": "false",
+            "nd": str(Sdata.creat_timed()),
+            "queryModel.showCount": "15",
+            "queryModel.currentPage": "1",
+            "queryModel.sortName": "",
+            "queryModel.sortOrder": "asc",
+            "time": "1"
+        }
+        re_json = test.get_session().post("http://jw.dfxy.net/jwglxt/cjcx/cjcx_cxDgXscj.html?"
+                                          "doType=query&gnmkdm=N305005").text
+        return re_json
+    return "获取成绩信息失败"
 
 
 if __name__ == "__main__":
