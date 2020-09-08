@@ -1,6 +1,5 @@
 import re
 import time
-import requests
 
 
 import RSAJS
@@ -132,7 +131,7 @@ def get_name_college(no, mm):
         coll = page.find("p", first=True)
         # 保存照片到本地
         html = test.get_session().get(url='http://jw.dfxy.net'+(page.find(".media-object", first=True).attrs['src']))
-        with open('C:/Users/38114/Desktop/'+no+'_'+mm+'.jpg', 'wb') as file:
+        with open('C:/Users/38114/Desktop/img/'+no+'_'+mm+'.jpg', 'wb') as file:
             file.write(html.content)
         return {
             "name": name.text,
