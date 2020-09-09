@@ -144,7 +144,7 @@ def get_class_schedule(no, mm):
         "xqm": "3"
     }
     re_json = test.post("http://jw.dfxy.net/jwglxt/kbcx/xskbcx_cxXsKb.html?gnmkdm=N2151",
-                                      data=data).text
+                        data=data).text
     return re_json
 
 
@@ -152,7 +152,7 @@ def get_class_schedule(no, mm):
 def get_grades(no, mm, ):
     test = check_session(no, mm)
     test.post("http://jw.dfxy.net/jwglxt/cjcx/cjcx_cxDgXscj.html?gnmkdm=N305005&"
-                            "layout=default&su={no}".format(no=no), data={"gndm": "N305005"})
+              "layout=default&su={no}".format(no=no), data={"gndm": "N305005"})
     data = {
         "xnm": "2019",
         "xqm": "",
@@ -165,7 +165,7 @@ def get_grades(no, mm, ):
         "time": "1"
     }
     re_json = test.post("http://jw.dfxy.net/jwglxt/cjcx/cjcx_cxDgXscj.html?"
-                                      "doType=query&gnmkdm=N305005", data=data).text
+                        "doType=query&gnmkdm=N305005", data=data).text
     return re_json
 
 
