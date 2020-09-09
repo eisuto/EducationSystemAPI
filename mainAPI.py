@@ -143,7 +143,7 @@ def get_class_schedule(no, mm):
         "xnm": "2020",
         "xqm": "3"
     }
-    re_json = test.get_session().post("http://jw.dfxy.net/jwglxt/kbcx/xskbcx_cxXsKb.html?gnmkdm=N2151",
+    re_json = test.post("http://jw.dfxy.net/jwglxt/kbcx/xskbcx_cxXsKb.html?gnmkdm=N2151",
                                       data=data).text
     return re_json
 
@@ -151,7 +151,7 @@ def get_class_schedule(no, mm):
 # 获取成绩
 def get_grades(no, mm, ):
     test = check_session(no, mm)
-    test.get_session().post("http://jw.dfxy.net/jwglxt/cjcx/cjcx_cxDgXscj.html?gnmkdm=N305005&"
+    test.post("http://jw.dfxy.net/jwglxt/cjcx/cjcx_cxDgXscj.html?gnmkdm=N305005&"
                             "layout=default&su={no}".format(no=no), data={"gndm": "N305005"})
     data = {
         "xnm": "2019",
@@ -164,7 +164,7 @@ def get_grades(no, mm, ):
         "queryModel.sortOrder": "asc",
         "time": "1"
     }
-    re_json = test.get_session().post("http://jw.dfxy.net/jwglxt/cjcx/cjcx_cxDgXscj.html?"
+    re_json = test.post("http://jw.dfxy.net/jwglxt/cjcx/cjcx_cxDgXscj.html?"
                                       "doType=query&gnmkdm=N305005", data=data).text
     return re_json
 

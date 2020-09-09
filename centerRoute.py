@@ -1,7 +1,5 @@
 from flask import Flask, request
-import pickle
 import mainAPI
-import LinkRedis
 
 app = Flask(__name__)
 
