@@ -1,9 +1,9 @@
+import pickle
 import re
 import time
-
-
 import RSAJS
 import base64
+import LinkRedis
 from requests_html import HTMLSession
 
 
@@ -50,7 +50,7 @@ class Sdata:
         'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7',
     }
 
-    def __init__(self,  yhm, password):
+    def __init__(self, yhm, password):
         self.__yhm = yhm
         self.__password = password
         self.__session = HTMLSession()
@@ -63,8 +63,8 @@ class Sdata:
     # 获取会话
     def get_session(self):
         return self.__session
-    # 生成时间戳 13 位
 
+    # 生成时间戳 13 位
     @staticmethod
     def creat_timed():
         return str(round(time.time() * 1000))
@@ -99,104 +99,82 @@ class Sdata:
             'mm': self.__ras_password,
             'mm': self.__ras_password
         }
+        # Session序列化并存到redis 10分钟过期
         return_page = self.__session.post(url, data=data)
+        cookies = pickle.dumps(self.get_session())
+
+        LinkRedis.Cache.set(self.__yhm, cookies)
         if str(return_page.url).find("initMenu") == -1:
             return False
         return True
 
-#    # 获取姓名 学部
-#    def get_name_college(self):
-#        test = Sdata(self.__yhm, self.__password)
-#        test.login()
-#        url = "http://jw.dfxy.net/jwglxt/xtgl/index_cxYhxxIndex.html?xt=jw&localeKey=zh_CN&_={timed}" \
-#              "&gnmkdm=index&su={yhm}".format(timed=self.creat_timed(), yhm=self.__yhm)
-#        page = test.__session.get(url).html
-#        name = page.find(".media-heading", first=True)
-#        coll = page.find("p", first=True)
-##       return name.text, coll.text
-#        return {
-#            "name": name.text,
-#            "college": coll.text
-#        }
+
+# 检查是否登陆过且缓存未失效
+def check_session(no, mm):
+    se = LinkRedis.Cache.get(no)
+    if se is None:
+        return Sdata(no, mm).login()
+    return pickle.loads(se)
+
 
 # 获取姓名 学部 照片
 def get_name_college(no, mm):
-    test = Sdata(no, mm)
-    if test.login():
-        url = "http://jw.dfxy.net/jwglxt/xtgl/index_cxYhxxIndex.html?xt=jw&localeKey=zh_CN&_={timed}" \
-              "&gnmkdm=index&su={yhm}".format(timed=test.creat_timed(), yhm=no)
-        page = test.get_session().get(url).html
-        name = page.find(".media-heading", first=True)
-        coll = page.find("p", first=True)
-        # 保存照片到本地
-        html = test.get_session().get(url='http://jw.dfxy.net'+(page.find(".media-object", first=True).attrs['src']))
-        with open('C:/img/'+no+'_'+mm+'.jpg', 'wb') as file:
-            file.write(html.content)
-        return {
-            "name": name.text,
-            "college": coll.text,
-        }
-    return "获取信息失败"
+    test = check_session(no, mm)
+    url = "http://jw.dfxy.net/jwglxt/xtgl/index_cxYhxxIndex.html?xt=jw&localeKey=zh_CN&_={timed}" \
+          "&gnmkdm=index&su={yhm}".format(timed=Sdata.creat_timed(), yhm=no)
+    page = test.get(url).html
+    name = page.find(".media-heading", first=True)
+    coll = page.find("p", first=True)
+    # 保存照片到本地
+    html = test.get(url='http://jw.dfxy.net' + (page.find(".media-object", first=True).attrs['src']))
+    with open('./static/' + no + '.jpg', 'wb') as file:
+        file.write(html.content)
+    return {
+        "name": name.text,
+        "college": coll.text,
+        "img": 'http://101.200.121.157/static/' + no + '.jpg'
+    }
 
 
 # 获取课程表
 def get_class_schedule(no, mm):
-    test = Sdata(no, mm)
-    if test.login():
-        data = {
-            "xnm": "2020",
-            "xqm": "3"
-        }
-        re_json = test.get_session().post("http://jw.dfxy.net/jwglxt/kbcx/xskbcx_cxXsKb.html?gnmkdm=N2151",
-                                          data=data).text
-        print(re_json)
-        return re_json
-    return  "获取课程表失败"
+    test = check_session(no, mm)
+    data = {
+        "xnm": "2020",
+        "xqm": "3"
+    }
+    re_json = test.get_session().post("http://jw.dfxy.net/jwglxt/kbcx/xskbcx_cxXsKb.html?gnmkdm=N2151",
+                                      data=data).text
+    return re_json
 
 
 # 获取成绩
-def get_grades(no, mm, year):
-    test = Sdata(no, mm)
-    if test.login():
-        data = {
-            "xnm": str(year),
-            "xqm": "",
-            "_search": "false",
-            "nd": str(Sdata.creat_timed()),
-            "queryModel.showCount": "15",
-            "queryModel.currentPage": "1",
-            "queryModel.sortName": "",
-            "queryModel.sortOrder": "asc",
-            "time": "1"
-        }
-        re_json = test.get_session().post("http://jw.dfxy.net/jwglxt/cjcx/cjcx_cxDgXscj.html?"
-                                          "doType=query&gnmkdm=N305005").text
-        return re_json
-    return "获取成绩信息失败"
+def get_grades(no, mm, ):
+    test = check_session(no, mm)
+    test.get_session().post("http://jw.dfxy.net/jwglxt/cjcx/cjcx_cxDgXscj.html?gnmkdm=N305005&"
+                            "layout=default&su={no}".format(no=no), data={"gndm": "N305005"})
+    data = {
+        "xnm": "2019",
+        "xqm": "",
+        "_search": "false",
+        "nd": str(Sdata.creat_timed()),
+        "queryModel.showCount": "15",
+        "queryModel.currentPage": "1",
+        "queryModel.sortName": "",
+        "queryModel.sortOrder": "asc",
+        "time": "1"
+    }
+    re_json = test.get_session().post("http://jw.dfxy.net/jwglxt/cjcx/cjcx_cxDgXscj.html?"
+                                      "doType=query&gnmkdm=N305005", data=data).text
+    return re_json
 
 
 if __name__ == "__main__":
     yhm = input("请输入学号")
-    mm  = input("请输入密码")
+    mm = input("请输入密码")
     test = Sdata(yhm, mm)
     if test.login():
         print("欢迎您：{name} , {coll}".format(name=test.get_name_college(yhm, mm)[0],
                                            coll=test.get_name_college(yhm, mm)[1]))
     else:
         print("登录失败，请重试")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

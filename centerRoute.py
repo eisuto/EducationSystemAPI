@@ -1,12 +1,9 @@
-import time
-
 from flask import Flask, request
-#from flask_redis import FlaskRedis
+import pickle
 import mainAPI
+import LinkRedis
 
 app = Flask(__name__)
-#app.config['REDIS_URL'] = 'redis://:@localhost:6379/0'
-#redis_client = FlaskRedis(app)
 
 
 @app.route('/')
@@ -19,14 +16,7 @@ def hello_world():
 def login():
     no = request.form['no']
     mm = request.form['mm']
-
     student = mainAPI.Sdata(no, mm)
-    # 存到缓存 10分钟过期
-    # expires = int(time.time()) + 600
-    # p = redis_client.pipeline()
-    # p.set('no', no)
-    # p.expireat('no', expires)
-    # p.execute()
 
     return str(student.login())
 
@@ -36,7 +26,7 @@ def login():
 def info():
     no = request.form['no']
     mm = request.form['mm']
-
+    # return mainAPI.get_name_college(no, mm)
     return mainAPI.get_name_college(no, mm)
 
 
@@ -45,7 +35,6 @@ def info():
 def class_schedule():
     no = request.form['no']
     mm = request.form['mm']
-
     return mainAPI.get_class_schedule(no, mm)
 
 
@@ -54,9 +43,8 @@ def class_schedule():
 def grades():
     no = request.form['no']
     mm = request.form['mm']
-    year = request.form['year']
-
-    return mainAPI.get_grades(no, mm, year)
+    # year = request.form['year']
+    return mainAPI.get_grades(no, mm)
 
 
 if __name__ == "__main__":
