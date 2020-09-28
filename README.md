@@ -1,2 +1,2 @@
-# 基于Python爬虫的正方系统第三方API
+# 基于Python爬虫的正方教务第三方API
 ## request-html + redis
